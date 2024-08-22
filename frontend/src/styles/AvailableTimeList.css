@@ -1,0 +1,32 @@
+.time_list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 4px;
+}
+
+button {
+    padding-top: 0.55rem;
+    padding-left: 0.87rem;
+    padding-right: 0.87rem;
+    padding-bottom: 0.55rem;
+
+    outline: none;
+    border: 0.2rem solid transparent;
+    border-radius: 8px;
+
+    font-size: 0.875rem;
+    font-weight: 400;
+
+    background-color: #E7FFFC;
+    border-color: #E7FFFC;
+    color: #027765;
+}
+
+button:hover {
+    background-color: #c9fbf4;
+}
+
+button:active {
+    border-color: #027765;
+}

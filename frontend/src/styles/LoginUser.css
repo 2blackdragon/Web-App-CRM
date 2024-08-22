@@ -1,0 +1,59 @@
+.login_div h1 {
+    color: #027765;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.login_div {
+    margin: 20% 25% 3% 25%;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 2% 0% 2% 0%;
+
+    box-shadow: 7px 5px 5px #c8c7c7;
+
+}
+
+form {
+    display: block;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.fullname {
+    width: 100%;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 20px;
+}
+
+.submit {
+    font-size: 14px;
+
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-top: 0.55rem;
+    padding-left: 0.87rem;
+    padding-right: 0.87rem;
+    padding-bottom: 0.55rem;
+
+    color: #027765;
+    background-color: #E7FFFC;
+
+    outline: none;
+    border: 0.2rem solid transparent;
+    border-radius: 0.6rem;
+}
+
+.submit:hover {
+    background-color: #c9fbf4;
+    border-color: #c9fbf4;
+}
+
+.submit:active {
+    border-color: #027765;
+}
+
