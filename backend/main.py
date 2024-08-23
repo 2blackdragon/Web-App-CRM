@@ -57,15 +57,18 @@ async def add_test_data_to_database():
     await AvailableDatetimeRepository.add_available_datetime(AvailableDatetimeBase(master_id=1, available_datetime="2024-10-09T09:20"))
 
 
-async def form_available_data_to_json(id, fullname, available_datetime_list):
-    available_str_datetime_list = []
-    for available_datetime in available_datetime_list:
-        str_available_datetime = datetime.strftime(available_datetime, "%Y-%m-%dT%H:%M")
-        available_str_datetime_list.append(str_available_datetime)
-    json_data = json.dumps({"master_id": id, "master_fullname": fullname, "master_available_datetime": available_str_datetime_list}, ensure_ascii=False)
-    return json_data
+@app.post("/login")
+async def login_user(model: UserBase):
+    #add test rows in database
+    await add_test_data_to_database()
+    
+    await UserRepository.add_user(model)
 
 
+@app.get("/")
+async def show_available_datetime():
+    all_available_datetime = await get_available_datetime()
+    return all_available_datetime
 
 async def get_available_datetime():
     master_id_list = await UserRepository.get_all_master_id()
@@ -79,21 +82,13 @@ async def get_available_datetime():
 
     return all_available_data
 
-
-@app.post("/login")
-async def login_user(model: UserBase):
-    #add test rows in database
-    await add_test_data_to_database()
-    
-    await UserRepository.add_user(model)
-
-
-@app.get("/")
-async def show_available_datetime():
-
-    all_available_datetime = await get_available_datetime()
-
-    return all_available_datetime
+async def form_available_data_to_json(id, fullname, available_datetime_list):
+    available_str_datetime_list = []
+    for available_datetime in available_datetime_list:
+        str_available_datetime = datetime.strftime(available_datetime, "%Y-%m-%dT%H:%M")
+        available_str_datetime_list.append(str_available_datetime)
+    json_data = json.dumps({"master_id": id, "master_fullname": fullname, "master_available_datetime": available_str_datetime_list}, ensure_ascii=False)
+    return json_data
 
 
 @app.post("/add_record")
@@ -102,3 +97,9 @@ async def add_record(model: RecordBase):
     await AvailableDatetimeRepository.delete_available_datetime(AvailableDatetimeBase(master_id=model.master_id, available_datetime=model.record_datetime))
 
 
+@app.get("/get_user_id/{name}&{surname}")
+async def get_user_id(name, surname):
+    user_id = await UserRepository.get_user_id(UserBase(name=name, 
+                                                        surname=surname, 
+                                                        is_master=False))
+    return user_id

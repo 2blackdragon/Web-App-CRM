@@ -11,14 +11,6 @@ function LoginUser () {
         navigate('/');
     };
 
-    const save_user_data = async (name, surname) => {
-
-        const user_id = await api.get("/get_user_id", {"name": name, "surname": surname})
-
-        localStorage.setItem("isLoggedIn", true);
-        localStorage.setItem("userId", user_id);
-    }
-
     const post_user = async (event) => {
         event.preventDefault();
         const name = name_ref.current.value;
@@ -32,6 +24,14 @@ function LoginUser () {
         save_user_data(name, surname);
 
         navigateHomePage();
+    }
+
+
+    const save_user_data = async (name, surname) => {
+        const response = await api.get(`/get_user_id/${name}&${surname}`);
+
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("user_id", response.data);
     }
 
     const name_ref = useRef();

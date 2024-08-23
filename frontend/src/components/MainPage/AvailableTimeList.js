@@ -9,7 +9,9 @@ function AvailableTimeList (props) {
 
     const post_record = async (event) => {
         event.preventDefault();
-        await api.post("/add_record", {"master_id": master_id, "client_id": 3, "record_datetime": datetime_for_db});
+        const client_id = parseInt(localStorage.getItem("user_id"));
+        console.log(client_id);
+        await api.post("/add_record", {"master_id": master_id, "client_id": client_id, "record_datetime": datetime_for_db});
         document.location.reload();
     }
 

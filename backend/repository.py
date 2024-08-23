@@ -34,6 +34,16 @@ class UserRepository:
                                     is_master=user_model.is_master)
                 session.add(item_to_add)
                 await session.commit()
+
+    @classmethod
+    async def get_user_id(cls, user_model) -> int:
+        async with async_session() as session:
+            query = select(UserORM.id).where((UserORM.name == user_model.name) &
+                                             (UserORM.surname == user_model.surname) &
+                                             (UserORM.is_master == user_model.is_master))
+            user_id = await session.execute(query)
+            user_id = user_id.scalars().first()
+            return user_id
     
     @classmethod
     async def get_all_master_id(cls) -> list[int]:
